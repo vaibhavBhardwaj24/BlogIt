@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allBlogs } from "../../store/blogs";
 import { Link } from "react-router-dom";
-
+import { getBlogById } from "../../store/blogs";
 import { currentUser } from "../../store/users.js";
 import { loginUser, logoutUser } from "../../store/users.js";
 import FindUsers from "../users/findUsers.jsx";
@@ -39,7 +39,6 @@ function BlogFeed() {
   }, [isLoading]);
   return (
     <>
-     
       {logged ? (
         <>
           <LoggedInNavbar />
@@ -63,7 +62,13 @@ function BlogFeed() {
             <div className="grid-cols-1 grid md:w-4/6 w-10/12 ">
               {allBloog.blogs.map((blg) => (
                 <div key={blg._id} className="md:h-72 h-40">
-                  <div className="h-full w-full flex flex-col items-center">
+                  <div
+                    className="h-full w-full flex flex-col items-center"
+                    onClick={() => {
+                      const IID = blg._id;
+                      dispatch(getBlogById({ blogId: IID }));
+                    }}
+                  >
                     <Link
                       to={`/b/getById/${blg._id}`}
                       className="h-full w-full"
