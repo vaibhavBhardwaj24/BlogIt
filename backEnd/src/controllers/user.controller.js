@@ -4,6 +4,7 @@ import { uploadCloud, delCloud } from "../utils/cloudinary.js";
 import fs from "fs";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
+import { log } from "console";
 
 const registerUser = asyncHandler(async (req, res) => {
   const {
@@ -63,6 +64,7 @@ const generateRefreshAndAccessToken = async (id) => {
 };
 const loginUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
+  console.log(req.body);
   if (!username && !email) {
     console.error("send email or username");
   }
@@ -81,15 +83,9 @@ const loginUser = asyncHandler(async (req, res) => {
   const { accToken, refToken } = await generateRefreshAndAccessToken(
     specificUser._id
   );
-  const options = {
-    httpOnly: true,
-    secure: true,
-    sameSite: "None",
-  };
+
   return res
     .status(200)
-    .cookie("accessToken", accToken, options)
-    .cookie("refToken", refToken, options)
     .json({ specificUser, accToken: accToken, redirectTo: "/b/blogFeed" });
 });
 const logoutUser = asyncHandler(async (req, res) => {

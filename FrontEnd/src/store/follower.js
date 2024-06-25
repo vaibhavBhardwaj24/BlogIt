@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const URL=" https://cec8-182-69-182-255.ngrok-free.app"
 const initialState = {
   followers: [],
   following: [],
@@ -18,7 +19,7 @@ export const toggleFollow = createAsyncThunk("toggleFollow", async (data) => {
   };
   try {
     const newUser = await axios.post(
-      "http://localhost:3000/v1/f/toggleFollow",
+      `${URL}/v1/f/toggleFollow`,
       options
     );
     return newUser.data;
@@ -29,7 +30,7 @@ export const toggleFollow = createAsyncThunk("toggleFollow", async (data) => {
 export const allFollowers = createAsyncThunk("allFollowers", async () => {
   const token = JSON.parse(localStorage.getItem("accToken"));
   try {
-    const newUser = await axios.get("http://localhost:3000/v1/f/allFollowers", {
+    const newUser = await axios.get(`${URL}/v1/f/allFollowers`, {
       accToken: token,
     });
     return newUser.data;
@@ -40,7 +41,7 @@ export const allFollowers = createAsyncThunk("allFollowers", async () => {
 export const allFollowing = createAsyncThunk("allFollowing", async () => {
   const token = JSON.parse(localStorage.getItem("accToken"));
   try {
-    const newUser = await axios.get("http://localhost:3000/v1/f/allFollowing", {
+    const newUser = await axios.get(`${URL}/v1/f/allFollowing`, {
       accToken: token,
     });
     return newUser.data;
@@ -59,7 +60,7 @@ export const isFollowing = createAsyncThunk("isFollowing", async (data) => {
   try {
     // console.log(options);
     const newUser = await axios.post(
-      "http://localhost:3000/v1/f/isFollowed",
+      `${URL}/v1/f/isFollowed`,
       options
     );
     console.log(newUser.data.message);

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const URL=" https://cec8-182-69-182-255.ngrok-free.app"
 const initialState = {
   isLiked: false,
   isLoading: false,
@@ -16,7 +17,7 @@ export const toggleLike = createAsyncThunk("toggleLike", async (data) => {
   };
   try {
     const newUser = await axios.post(
-      "http://localhost:3000/v1/l/toggleLike",
+      `${URL}/v1/l/toggleLike`,
       options
     );
     return newUser.data;
@@ -34,7 +35,7 @@ export const isLiked = createAsyncThunk("isLiked", async (data) => {
   // console.log(options);
   try {
     const newUser = await axios.post(
-      "http://localhost:3000/v1/l/isLiked/",
+      `${URL}/v1/l/isLiked/`,
       options
     );
     return newUser.data;

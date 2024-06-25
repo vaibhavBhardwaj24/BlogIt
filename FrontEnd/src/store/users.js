@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+const URL = " https://cec8-182-69-182-255.ngrok-free.app";
 const initialState = {
   profile: [],
   foundUser: [],
@@ -20,10 +21,7 @@ export const registerUser = createAsyncThunk("registerUser", async (data) => {
   };
   try {
     // console.log(options.fullName);
-    const newUser = await axios.post(
-      "http://localhost:3000/v1/user/register",
-      options
-    );
+    const newUser = await axios.post(`${URL}/v1/user/register`, options);
 
     return newUser.data;
   } catch (error) {
@@ -41,7 +39,7 @@ export const loginUser = createAsyncThunk("loginUser", async (data) => {
 
   try {
     const newUser = await axios.post(
-      "http://localhost:3000/v1/user/login",
+      `${URL}/v1/user/login`,
       options
       // config
     );
@@ -52,7 +50,7 @@ export const loginUser = createAsyncThunk("loginUser", async (data) => {
 });
 export const findUser = createAsyncThunk("findUser", async (data) => {
   const { username } = data;
-  
+
   const token = JSON.parse(localStorage.getItem("accToken"));
   const options = {
     username: username,
@@ -60,10 +58,7 @@ export const findUser = createAsyncThunk("findUser", async (data) => {
   };
   try {
     // console.log(username,"store");
-    const newUser = await axios.post(
-      "http://localhost:3000/v1/user/findUser",
-      options
-    );
+    const newUser = await axios.post(`${URL}/v1/user/findUser`, options);
     return newUser.data;
   } catch (error) {
     throw error;
@@ -75,7 +70,7 @@ export const logoutUser = createAsyncThunk("logoutUser", async (data) => {
 
     const { token } = data;
     console.log(initialState.loggedUser);
-    const newUser = await axios.post("http://localhost:3000/v1/user/logout", {
+    const newUser = await axios.post(`${URL}/v1/user/logout`, {
       withCredentials: true,
       accToken: token,
     });
@@ -97,7 +92,7 @@ export const changePassword = createAsyncThunk(
     };
     try {
       const newUser = await axios.post(
-        "http://localhost:3000/v1/user/changePassword",
+        `${URL}/v1/user/changePassword`,
         options
       );
       return newUser.data;
@@ -110,7 +105,7 @@ export const currentUser = createAsyncThunk("currentUser", async () => {
   try {
     const token = JSON.parse(localStorage.getItem("accToken"));
     // const token = initialState.loggedUser.accToken;
-    const newUser = await axios.post("http://localhost:3000/v1/user/currUser", {
+    const newUser = await axios.post(`${URL}/v1/user/currUser`, {
       accToken: token,
     });
     // console.log("current mkc");
@@ -127,10 +122,7 @@ export const otherUser = createAsyncThunk("otherUser", async (data) => {
     otherUser: userId,
   };
   try {
-    const other = await axios.post(
-      "http://localhost:3000/v1/user/otherProfile",
-      options
-    );
+    const other = await axios.post(`${URL}/v1/user/otherProfile`, options);
     console.log(other.data);
     return other.data;
   } catch (error) {
@@ -142,7 +134,7 @@ export const otherUser = createAsyncThunk("otherUser", async (data) => {
 
 //   try {
 //     const newUser = await axios.get(
-//       "http://localhost:3000/v1/user/findUser",
+//       "${URL}/v1/user/findUser",
 
 //     );
 //     return newUser.data;
@@ -232,7 +224,7 @@ const userSlice = createSlice({
     });
     builder.addCase(currentUser.fulfilled, (state, action) => {
       // console.log(action.payload)
-      
+
       state.loggedUser = action.payload;
       state.isLoading2 = false;
     });

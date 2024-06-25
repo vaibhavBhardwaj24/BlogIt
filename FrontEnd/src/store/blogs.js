@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
+const URL=" https://cec8-182-69-182-255.ngrok-free.app"
 const initialState = {
   findBlog: [],
   allBlogs: [],
@@ -18,7 +18,7 @@ export const allBlogs = createAsyncThunk("allBlogs", async (data) => {
     };
     console.log(options);
     const response = await axios.post(
-      "http://localhost:3000/v1/b/getBlogs",
+      `${URL}/v1/b/getBlogs`,
       options
     );
     // console.log(response.data);
@@ -41,7 +41,7 @@ export const createBlog = createAsyncThunk("createBlog", async (data) => {
   };
   try {
     const newBlog = await axios.post(
-      "http://localhost:3000/v1/b/createBlog",
+      `${URL}/v1/b/createBlog`,
       options
     );
     return newBlog.data;
@@ -57,7 +57,7 @@ export const getBlogById = createAsyncThunk("getBlogById", async (data) => {
   };
   try {
     const findBlog = await axios.post(
-      "http://localhost:3000/v1/b/getBlogById",
+      `${URL}/v1/b/getBlogById`,
       options
     );
     console.log(findBlog.data);
@@ -73,7 +73,7 @@ export const blogSmall = createAsyncThunk("blogSmall", async (data) => {
   };
   try {
     const blogSmall = await axios.post(
-      "http://localhost:3000/v1/b/blogSmall",
+      `${URL}/v1/b/blogSmall`,
       options
     );
     return blogSmall.data;
@@ -90,7 +90,7 @@ export const deleteBlog = createAsyncThunk("deleteBlog", async (data) => {
   };
   try {
     const findBlog = await axios.post(
-      "http://localhost:3000/v1/b/deleteBlog",
+      `${URL}/v1/b/deleteBlog`,
       options
     );
     return findBlog.data;
@@ -110,7 +110,7 @@ export const togglePublicBlog = createAsyncThunk(
     };
     try {
       const togglePub = await axios.post(
-        "http://localhost:3000/v1/b/togglePublic",
+        "${URL}/v1/b/togglePublic",
         options
       );
       return togglePub.data;

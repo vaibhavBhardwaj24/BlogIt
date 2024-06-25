@@ -34,7 +34,7 @@ const createBlog = asyncHandler(async (req, res) => {
 });
 const getBlogs = asyncHandler(async (req, res) => {
   console.log("yaha tk aya");
-  const { lim } = req.body;
+  const { lim=10 } = req.body;
   // console.log(req.body);
   const blogs = await Blog.aggregate([
     {
