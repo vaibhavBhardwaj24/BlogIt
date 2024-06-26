@@ -12,7 +12,7 @@ const handler = async (req, res) => {
       console.log("listening");
     });
   });
-  return serverless(app)
+  return serverless(app)(req,res);
 };
 export default handler
 // import dotenv from "dotenv";
