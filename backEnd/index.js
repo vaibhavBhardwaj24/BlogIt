@@ -36,8 +36,9 @@ app.use("/v1/l", likedRouter);
 app.use("/v1/s", savedRouter);
 console.log("starting");
 connectDB().then(() => {
-  app.listen(3000, () => {
-    console.log("listening");
-  });
+  // app.listen(3000, () => {
+  //   console.log("listening");
+  // });
+  console.log("listening");
 });
 export const handler=serverless(app)
