@@ -16,7 +16,7 @@ import serverless from "serverless-http";
 app.use("", (req, res) => {
   res.json({ message: "sdrty" });
 });
-dotenv.config({ path: "src/.env" });
+// dotenv.config({ path: "src/.env" });
 // app.use(
 //   cors({
 //     origin: "*",
