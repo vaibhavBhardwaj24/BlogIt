@@ -35,26 +35,9 @@ app.use("/v1/c", commentRouter);
 app.use("/v1/l", likedRouter);
 app.use("/v1/s", savedRouter);
 console.log("starting");
-// const handler = async (req, res) => {
 connectDB().then(() => {
   app.listen(3000, () => {
     console.log("listening");
   });
 });
-
-// };
-// import dotenv from "dotenv";
-
-// dotenv.config({ path: "src/.env" });
-
-// let isConnected = false;
-
-// const handler = async (req, res) => {
-//   if (!isConnected) {
-//     await connectDB();
-//     isConnected = true;
-//   }
-//   return serverless(app)(req, res);
-// };
-
-// export default handler;
+export const handler=serverless(app)
