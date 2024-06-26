@@ -8,7 +8,7 @@ dotenv.config({ path: "src/.env" });
 console.log("starting");
 const handler = async (req, res) => {
   connectDB().then(() => {
-    app.listen(process.env.PORT, () => {
+    app.listen(3000, () => {
       console.log("listening");
     });
   });
