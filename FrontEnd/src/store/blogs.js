@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const URL=" https://c7a7-182-69-182-255.ngrok-free.app"
+import { URL } from "./URL";
 const initialState = {
   findBlog: [],
   allBlogs: [],

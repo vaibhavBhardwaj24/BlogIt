@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const URL=" https://c7a7-182-69-182-255.ngrok-free.app"
+import { URL } from "./URL";
 const initialState = {
   followers: [],
   following: [],
@@ -18,10 +18,7 @@ export const toggleFollow = createAsyncThunk("toggleFollow", async (data) => {
     accToken: token,
   };
   try {
-    const newUser = await axios.post(
-      `${URL}/v1/f/toggleFollow`,
-      options
-    );
+    const newUser = await axios.post(`${URL}/v1/f/toggleFollow`, options);
     return newUser.data;
   } catch (error) {
     throw error;
@@ -59,10 +56,7 @@ export const isFollowing = createAsyncThunk("isFollowing", async (data) => {
   };
   try {
     // console.log(options);
-    const newUser = await axios.post(
-      `${URL}/v1/f/isFollowed`,
-      options
-    );
+    const newUser = await axios.post(`${URL}/v1/f/isFollowed`, options);
     console.log(newUser.data.message);
     return newUser.data.message;
   } catch (error) {}
