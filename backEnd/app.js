@@ -29,7 +29,7 @@ const app = express();
 // app.use("/v1/c", commentRouter);
 // app.use("/v1/l", likedRouter);
 // app.use("/v1/s", savedRouter);
-app.get("/", (req, res) => {
+app.use("/", (req, res) => {
   res.status(200).send("Hello from Express!");
 });
 export { app };
