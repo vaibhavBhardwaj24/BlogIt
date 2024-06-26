@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import userRouter from "../src/router/user.router.js";
-import followRouter from "../src/router/follow.router.js";
-import blogRouter from "../src/router/blogs.router.js";
-import commentRouter from "../src/router/comment.router.js";
-import likedRouter from "../src/router/liked.route.js";
-import savedRouter from "../src/router/saved.router.js";
+import userRouter from "./src/router/user.router.js";
+import followRouter from "./src/router/follow.router.js";
+import blogRouter from "./src/router/blogs.router.js";
+import commentRouter from "./src/router/comment.router.js";
+import likedRouter from "./src/router/liked.route.js";
+import savedRouter from "./src/router/saved.router.js";
 const app = express();
 // app.use(
 //   cors(
