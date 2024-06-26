@@ -6,6 +6,9 @@ import { default as connectDB } from "./src/utils/db.js";
 import express from "express";
 const app=express()
 import serverless from "serverless-http";
+app.use("",(req,res)=>{
+  res.json({message:"sdrty"})
+})
 dotenv.config({ path: "src/.env" });
 console.log("starting");
 // const handler = async (req, res) => {
