@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
-import { default as connectDB } from "./utils/db.js";
+// import { default as connectDB } from "";
+import {default as connectDB} from "../src/utils/db.js"
+// import { app } from "./app.js";
 import { app } from "./app.js";
 dotenv.config({ path: "src/.env" });
 console.log("starting");
