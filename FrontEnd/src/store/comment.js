@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-const URL = " https://cec8-182-69-182-255.ngrok-free.app";
+const URL = " https://c7a7-182-69-182-255.ngrok-free.app";
 const initialState = {
   allComments: [],
   isLoading: true,
