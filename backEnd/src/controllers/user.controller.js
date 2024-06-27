@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json({ checkUser, accToken: accToken, redirectTo: "/b/blogFeed" });
+    .json({ checkUser, accToken: accToken, redirectTo: "/u/login" });
 });
 const generateRefreshAndAccessToken = async (id) => {
   try {

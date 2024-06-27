@@ -42,12 +42,12 @@ function Registeruser() {
   return (
     <>
       <Navbar />
-      <div className="bg-dot-white/[0.2] h-full items-center flex">
-        <div className=" md:w-3/6 mx-auto  md:rounded-2xl p-4 md:p-8 rounded-xl shadow-input bg-white dark:bg-black border-[1px] border-white/[0.46]  ">
-          <h1 className="text-7xl font-bold bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6 flex justify-center w-full">
+      <div className="bg-dot-white/[0.2]  items-center h-[100vh] flex">
+        <div className=" md:w-3/6 mx-auto  md:rounded-2xl p-4 md:p-8 rounded-xl shadow-input bg-white dark:bg-black border-[1px] border-white/[0.46]   ">
+          <h1 className="text-7xl font-bold bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6 flex justify-center w-full ">
             Sign Up
           </h1>
-          <form action="" className="my-8">
+          <form action="" className="my-8 ">
             <div className="flex flex-col md:flex-col space-y-2 md:space-y-0 md:space-x-2 mb-4 gap-4 ">
               <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4 gap-4">
                 <div className="md:flex-1">
@@ -81,7 +81,7 @@ function Registeruser() {
                     <Input
                       id="pass"
                       placeholder="****"
-                      type="text"
+                      type="password"
                       value={password}
                       onChange={(e) => {
                         setPassword(e.target.value);
