@@ -1,13 +1,13 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
-function FollowingList({ fowerList, list }) {
+function FollowingList({ fowerList, list,ing }) {
   return (
     <div className="absolute w-full h-full top-0 left-0 backdrop-blur-sm flex justify-center items-center">
-      <div className="bg-gray-200 p-4 w-1/2 md:w-1/6 rounded-lg ">
+      <div className="bg-black/[0.96] border-[1px] border-white/[0.3] p-4 w-1/2 md:w-1/6 rounded-lg ">
         {console.log("comaporok", list)}
-        Following
-        <div className="border-[1px] border-gray-400 "></div>
+        {ing?(<>Following</>):(<>Followers</>)}
+        <div className="border-[1px] border-white/[0.4] "></div>
         {list.map((item) => (
           <>
             {console.log(item._id)}
@@ -20,13 +20,7 @@ function FollowingList({ fowerList, list }) {
             </div>
           </>
         ))}
-        {/* <button
-          onClick={() => {
-            fowerList(false);
-          }}
-        >
-          click
-        </button> */}
+        
       </div>
     </div>
   );

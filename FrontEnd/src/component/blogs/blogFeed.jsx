@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { allBlogs } from "../../store/blogs";
-import { Link } from "react-router-dom";
-import { getBlogById } from "../../store/blogs";
-import { currentUser } from "../../store/users.js";
-import { loginUser, logoutUser } from "../../store/users.js";
-import FindUsers from "../users/findUsers.jsx";
 import Navbar from "../pages/navbar.jsx";
+import { TracingBeam } from "../ui/tracing-beam.tsx";
 import LoggedInNavbar from "../pages/loggedInNavbar.jsx";
-import BlogCard from "../pages/blogCard.jsx";
+import { BentoGrid, BentoGridItem } from "../ui/bento-grid.tsx";
+import Loadings from "../pages/loading.jsx";
 function BlogFeed() {
+  const Skeleton = () => (
+    <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
+  );
   const dispatch = useDispatch();
   const [load, setLoad] = useState(true);
   const allBloog = useSelector((state) => state.allBlogs.allBlogs);
@@ -51,35 +51,45 @@ function BlogFeed() {
 
       {load ? (
         <>
-          <h1>lets see</h1>
+          <Loadings />
         </>
       ) : (
         <>
-          <div className="flex-col flex items-center w-full">
-            <h1 className="text-7xl w-full flex justify-center md:p-5 sm:p-3">
-              Latest blogs
-            </h1>
-            <div className="grid-cols-1 grid md:w-4/6 w-10/12 ">
-              {allBloog.blogs.map((blg) => (
-                <div key={blg._id} className="md:h-72 h-40">
-                  <div
-                    className="h-full w-full flex flex-col items-center"
-                    onClick={() => {
-                      const IID = blg._id;
-                      dispatch(getBlogById({ blogId: IID }));
-                    }}
-                  >
-                    <Link
-                      to={`/b/getById/${blg._id}`}
-                      className="h-full w-full"
-                    >
-                      <BlogCard blog={blg} />
-                    </Link>
-                    <div className="border-b-[1px] p-1 opacity-50 border-slate-600 w-3/4  "></div>
-                  </div>
+          <div className="pt-12">
+            <TracingBeam className="px-1">
+              <div className="flex-col flex items-center w-full z-10 ">
+                <h1 className="text-7xl font-bold bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6">
+                  Latest Blogs
+                </h1>
+                <div className="w-full">
+                  <BentoGrid>
+                    {allBloog.blogs.map((blg, i) => (
+                      <BentoGridItem
+                     
+                        _id={blg._id}
+                        key={blg._id}
+                        title={blg.title}
+                        description={blg.article}
+                        creator={blg.creator}
+                        creatorName={blg.creatorName}
+                        likes={blg.totalLikes}
+                        comments={blg.totalComments}
+                        header={
+                          blg.coverImage ? (
+                            <img src={blg.coverImage} alt="" />
+                          ) : (
+                            <Skeleton />
+                          )
+                        }
+                        className={i % 5 === 0 ? "md:col-span-2" : ""}
+                        
+                      />
+                      // </Link>
+                    ))}
+                  </BentoGrid>
                 </div>
-              ))}
-            </div>
+              </div>
+            </TracingBeam>
           </div>
         </>
       )}
@@ -90,8 +100,6 @@ function BlogFeed() {
       >
         load more
       </button>
-      {/* <FindUsers /> */}
-      {/* <img src="https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" /> */}
     </>
   );
 }

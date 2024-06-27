@@ -5,6 +5,7 @@ import { getBlogById } from "../../store/blogs";
 import { toggleLike, isLiked } from "../../store/liked.js";
 import { isSaved, toggleSave } from "../../store/saved.js";
 import { Link } from "react-router-dom";
+import Loadings from "../pages/loading.jsx";
 // import "./getById.css";
 import axios from "axios";
 import Comments from "./comment.jsx";
@@ -71,10 +72,10 @@ function GetById() {
       {logged ? <LoggedInNavbar /> : <Navbar />}
 
       {Loading ? (
-        <h1>Loading.....</h1>
+        <Loadings/>
       ) : (
         <>
-          <div className="w-full flex flex-col justify-start items-center">
+          <div className=" text-black w-full flex flex-col justify-start items-center">
             <img
               src={findBlog.blogs[0].coverImage}
               className="w-full h-[110vw] md:h-[30vw] object-top object-cover"
@@ -97,7 +98,7 @@ function GetById() {
                     onClick={() => {
                       if (loda) {
                         dispatch(
-                          toggleLike({ blogId, title: findBlog.blogs[0].title })
+                          toggleLike({ blogId, title: findBlog.blogs[0].title ,coverURL:findBlog.blogs[0].coverImage})
                         );
                         console.log("loggedin");
                         if (like) {
@@ -123,7 +124,7 @@ function GetById() {
                     onClick={() => {
                       if (loda) {
                         dispatch(
-                          toggleSave({ blogId, title: findBlog.blogs[0].title })
+                          toggleSave({ blogId, title: findBlog.blogs[0].title,coverURL:findBlog.blogs[0].coverImage })
                         );
                       } else {
                         navigate("/u/login");
@@ -140,23 +141,23 @@ function GetById() {
                   </div>
                 </div>
               </div>
-              <div className="mt-12 flex flex-row md:w-4/6 w-11/12 justify-around font-thin border-b-[1px] border-gray-300">
+              <div className="mt-12 flex flex-row md:w-4/6 w-11/12 justify-around font-thin border-b-[1px] text-white border-gray-300">
                 {console.log(readTime)}
                 <p>{readTime} Min Read</p>
                 <p>{findBlog.blogs[0].createdAt}</p>
               </div>
-              <div className=" mt-1  md:w-4/6 w-11/12 text-2xl font-serif">
+              <div className=" mt-1 text-white  md:w-4/6 w-11/12 text-2xl font-serif">
                 {findBlog.blogs[0].article}
               </div>
               <div className="border-[1px] border-gray-300 m-1 md:w-4/6 w-11/12 mt-4"></div>
               <div className="flex flex-col md:w-4/6 w-11/12 ">
-                <h1 className="font-bold text-4xl font-serif">Comments:</h1>
+                <h1 className="font-bold text-4xl font-serif text-white">Comments:</h1>
                 <Comments blogId={blogId} />
                 {findBlog.blogs[0].allComments.map((com) => (
                   <>
                     <div
                       key={com._id}
-                      className="bg-gray-300 flex flex-col items-start rounded-lg p-4 m-2"
+                      className="bg-gray-300 hover:translate-x-2 transition duration-200 flex flex-col items-start rounded-lg p-4 m-2"
                     >
                       <div className="flex justify-between w-full">
                         <Link to={`/u/otherUser/${com.user}`}>
@@ -176,7 +177,7 @@ function GetById() {
 
                         <p className="text-xs">{com.createdAt}</p>
                       </div>
-                      <div className="border-[1px] border-gray-900 m-1 w-full"></div>
+                      <div className="border-[1px] border-black/[0.5] m-1 w-full"></div>
                       <p className="p-0">{com.comment} </p>
                     </div>
                   </>

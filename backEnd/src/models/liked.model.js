@@ -14,13 +14,13 @@ const liked=new Schema({
         type:String,
         required:true
     },
-    userUrl:{
-        type:String,
-        
-    },
+    
     title: {
         type: String,
         required: true,
       },
+    coverURL:{
+        type:String
+    }
 })
 export const Liked=mongoose.model("Liked",liked)

@@ -6,11 +6,13 @@ const initialState = {
   isLoading: false,
 };
 export const toggleSave = createAsyncThunk("toggleSave", async (data) => {
-  const { blogId } = data;
+  const { blogId,coverURL,title } = data;
   const token = JSON.parse(localStorage.getItem("accToken"));
   const options = {
     blogId: blogId,
     accToken: token,
+    title:title,
+    coverURL:coverURL
   };
   try {
     const newUser = await axios.post(`${URL}/v1/s/savePost`, options);
@@ -26,6 +28,7 @@ export const isSaved = createAsyncThunk("isSaved", async (data) => {
   const options = {
     blogId: blogId,
     accToken: token,
+    
   };
   try {
     const newUser = await axios.post(`${URL}/v1/s/isSaved`, options);

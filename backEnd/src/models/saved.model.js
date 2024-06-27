@@ -14,5 +14,8 @@ const saved = new Schema({
     type: String,
     required: true,
   },
+  coverURL: {
+    type: String,
+  },
 });
 export const Saved = mongoose.model("saved", saved);

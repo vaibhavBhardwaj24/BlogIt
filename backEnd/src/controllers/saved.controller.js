@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandle.js";
 import { Saved } from "../models/saved.model.js";
 const toggleSaved = asyncHandler(async (req, res) => {
   const currUser = req.user;
-  const { blogId, title } = req.body;
+  const { blogId, title,coverURL } = req.body;
   console.log(title);
   const isSaved = await Saved.findOne({
     blogId: blogId,
@@ -17,6 +17,7 @@ const toggleSaved = asyncHandler(async (req, res) => {
       blogId,
       user: currUser._id,
       title: title,
+      coverURL:coverURL,
     });
     return res.status(200).json({ message: "saved", newSave });
   }

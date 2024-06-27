@@ -7,7 +7,7 @@ const initialState = {
   isLoading: false,
 };
 export const toggleLike = createAsyncThunk("toggleLike", async (data) => {
-  const { blogId, title } = data;
+  const { blogId, title,coverURL } = data;
   // console.log("toggle like liked,js line 9", title);
   const token = JSON.parse(localStorage.getItem("accToken"));
   // const token = JSON.parse(localStorage.getItem("accToken"));
@@ -15,6 +15,7 @@ export const toggleLike = createAsyncThunk("toggleLike", async (data) => {
     title: title,
     blogId: blogId,
     accToken: token,
+    coverURL:coverURL
   };
   try {
     const newUser = await axios.post(

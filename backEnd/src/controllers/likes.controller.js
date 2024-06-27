@@ -2,7 +2,7 @@ import { asyncHandler } from "../utils/asyncHandle.js";
 import { Liked } from "../models/liked.model.js";
 const toggleLike = asyncHandler(async (req, res) => {
   const currUser = req.user;
-  const { blogId,title } = req.body;
+  const { blogId,title,coverURL } = req.body;
   const isLiked = await Liked.findOne({
     blogId: blogId,
     user: currUser._id,
@@ -15,9 +15,10 @@ const toggleLike = asyncHandler(async (req, res) => {
       blogId,
       user: currUser._id,
       username: currUser.username,
-      userUrl: currUser.avatar,
+      coverURL:coverURL,
       title: title,
     });
+    console.log(coverURL);
     return res.status(200).json({ message: "liked", newLike });
   }
 });

@@ -386,7 +386,25 @@ const otherProfile = asyncHandler(async (req, res) => {
   ]);
   return res.status(200).json({ profile });
 });
-
+const currAva = asyncHandler(async (req, res) => {
+  const { userID } = req.body;
+  if (userID != null) {
+    const Obj = new mongoose.Types.ObjectId(userID);
+    const profile = await User.aggregate([
+      {
+        $match: {
+          _id: Obj,
+        },
+      },
+      {
+        $project: {
+          avatar: 1,
+        },
+      },
+    ]);
+    return res.status(200).json({ profile });
+  }
+});
 export {
   registerUser,
   loginUser,
@@ -400,4 +418,5 @@ export {
   findUser,
   trial,
   otherProfile,
+  currAva
 };

@@ -9,6 +9,7 @@ import {
   userProfile,
   findUser,
   otherProfile,
+  currAva,
 } from "../controllers/user.controller.js";
 import { upload } from "../middleware/multer.middleware.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
@@ -30,6 +31,7 @@ userRouter
   );
 userRouter.route("/updUser").post(verifyJWT, updateUser);
 userRouter.route("/otherProfile").post(otherProfile);
+userRouter.route("/currAva").post(currAva)
 // userRouter.route("/profile/:profile").post(verifyJWT, userProfile);
 // userRouter.route("/profile/:profile").post(verifyJWT,trial)
 export default userRouter;
