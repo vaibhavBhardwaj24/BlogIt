@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allBlogs } from "../../store/blogs";
+import { allBlogs, getBlogById } from "../../store/blogs";
 import Navbar from "../pages/navbar.jsx";
 import { TracingBeam } from "../ui/tracing-beam.tsx";
 import LoggedInNavbar from "../pages/loggedInNavbar.jsx";
@@ -58,14 +58,16 @@ function BlogFeed() {
           <div className="pt-12">
             <TracingBeam className="px-1">
               <div className="flex-col flex items-center w-full z-10 ">
-                <h1 className="text-7xl font-bold bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6">
+                <h1  className="text-7xl font-bold bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6">
                   Latest Blogs
                 </h1>
                 <div className="w-full">
                   <BentoGrid>
                     {allBloog.blogs.map((blg, i) => (
                       <BentoGridItem
-                     
+                      onClick={()=>{
+                        dispatch(getBlogById({blogId:blg._id}))
+                      }}
                         _id={blg._id}
                         key={blg._id}
                         title={blg.title}

@@ -14,6 +14,7 @@ import Navbar from "../pages/navbar.jsx";
 function GetById() {
   const dispatch = useDispatch();
   const [Loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
   const [like, setLike] = useState(false);
   const [save, setSave] = useState(false);
   const [readTime, setReadTime] = useState(0);
@@ -39,6 +40,11 @@ function GetById() {
     console.log(token);
   }, [token]);
   useEffect(() => {
+    dispatch(getBlogById({ blogId }));
+    setLoading2(false);
+    // setPubAt()
+  }, [blogId]);
+  useEffect(() => {
     if (logged) {
       dispatch(isLiked({ blogId: blogId }));
       setLike(isLike.message);
@@ -51,19 +57,17 @@ function GetById() {
       setSave(isSave.message);
     }
   }, [isSave.message]);
-  useEffect(() => {
-    dispatch(getBlogById({ blogId }));
 
-    // setPubAt()
-  }, [blogId]);
   useEffect(() => {
     setLoading(isLoading);
     if (!isLoading) {
-      setTotalLikes(findBlog.blogs[0].totalLikes);
-      const time = findBlog.blogs[0].article.split(" ").length - 1;
+      if (!loading2) {
+        setTotalLikes(findBlog.blogs[0].totalLikes);
+        const time = findBlog.blogs[0].article.split(" ").length - 1;
 
-      const round = Math.floor(time / 150);
-      setReadTime(round);
+        const round = Math.floor(time / 150);
+        setReadTime(round);
+      }
     }
   }, [isLoading]);
 
@@ -72,7 +76,7 @@ function GetById() {
       {logged ? <LoggedInNavbar /> : <Navbar />}
 
       {Loading ? (
-        <Loadings/>
+        <Loadings />
       ) : (
         <>
           <div className=" text-black w-full flex flex-col justify-start items-center">
@@ -98,7 +102,11 @@ function GetById() {
                     onClick={() => {
                       if (loda) {
                         dispatch(
-                          toggleLike({ blogId, title: findBlog.blogs[0].title ,coverURL:findBlog.blogs[0].coverImage})
+                          toggleLike({
+                            blogId,
+                            title: findBlog.blogs[0].title,
+                            coverURL: findBlog.blogs[0].coverImage,
+                          })
                         );
                         console.log("loggedin");
                         if (like) {
@@ -124,7 +132,11 @@ function GetById() {
                     onClick={() => {
                       if (loda) {
                         dispatch(
-                          toggleSave({ blogId, title: findBlog.blogs[0].title,coverURL:findBlog.blogs[0].coverImage })
+                          toggleSave({
+                            blogId,
+                            title: findBlog.blogs[0].title,
+                            coverURL: findBlog.blogs[0].coverImage,
+                          })
                         );
                       } else {
                         navigate("/u/login");
@@ -151,7 +163,9 @@ function GetById() {
               </div>
               <div className="border-[1px] border-gray-300 m-1 md:w-4/6 w-11/12 mt-4"></div>
               <div className="flex flex-col md:w-4/6 w-11/12 ">
-                <h1 className="font-bold text-4xl font-serif text-white">Comments:</h1>
+                <h1 className="font-bold text-4xl font-serif text-white">
+                  Comments:
+                </h1>
                 <Comments blogId={blogId} />
                 {findBlog.blogs[0].allComments.map((com) => (
                   <>
