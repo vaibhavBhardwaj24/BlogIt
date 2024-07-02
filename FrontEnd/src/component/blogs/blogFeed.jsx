@@ -58,16 +58,16 @@ function BlogFeed() {
           <div className="pt-12">
             <TracingBeam className="px-1">
               <div className="flex-col flex items-center w-full z-10 ">
-                <h1  className="text-7xl font-bold bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6">
+                <h1 className="text-7xl font-bold bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6">
                   Latest Blogs
                 </h1>
                 <div className="w-full">
                   <BentoGrid>
                     {allBloog.blogs.map((blg, i) => (
                       <BentoGridItem
-                      onClick={()=>{
-                        dispatch(getBlogById({blogId:blg._id}))
-                      }}
+                        onClick={() => {
+                          dispatch(getBlogById({ blogId: blg._id }));
+                        }}
                         _id={blg._id}
                         key={blg._id}
                         title={blg.title}
@@ -84,7 +84,6 @@ function BlogFeed() {
                           )
                         }
                         className={i % 5 === 0 ? "md:col-span-2" : ""}
-                        
                       />
                       // </Link>
                     ))}
@@ -95,13 +94,16 @@ function BlogFeed() {
           </div>
         </>
       )}
-      <button
-        onClick={() => {
-          setLim(lim + 10);
-        }}
-      >
-        load more
-      </button>
+      <div className="flex w-full justify-center items-center">
+        <button
+        className="border-[1px] border-white/[0.96] p-2 m-2 rounded-lg hover:bg-white/[0.3] duration-200"
+          onClick={() => {
+            setLim(lim + 10);
+          }}
+        >
+          Load more
+        </button>
+      </div>
     </>
   );
 }

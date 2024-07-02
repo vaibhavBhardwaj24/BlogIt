@@ -22,7 +22,7 @@ function CreateBlog() {
   return (
     <>
       <LoggedInNavbar />
-      <div className=" flex h-full flex-col w-full items-center justify-center pt-4 font-serif">
+      <div className=" flex h-full flex-col w-full items-center justify-center pt-4 ">
         <form className="flex flex-col h-full w-10/12 md:w-1/2 text-5xl justify-start items-start">
           <h1 className="flex justify-center border-b-2 w-full p-4 border-slate-500">
             Post a Blog
@@ -31,7 +31,7 @@ function CreateBlog() {
           <textarea
             type="text"
             value={title}
-            className=" focus:outline-none h-auto text-nowrap my-4"
+            className=" focus:outline-none bg-transparent  rounded-lg h-auto text-nowrap my-4"
             placeholder="Title"
             onChange={(e) => {
               setTitle(e.target.value);
@@ -40,7 +40,7 @@ function CreateBlog() {
           <textarea
             rows={20}
             type="text"
-            className="text-xl w-full  focus:outline-none  "
+            className="text-xl w-full bg-transparent focus:outline-none  "
             placeholder="Tell your story"
             value={article}
             onChange={(e) => {
@@ -63,7 +63,7 @@ function CreateBlog() {
             </div>
             <input
               type="text"
-              className=" w-full flex-1"
+              className=" w-full bg-transparent flex-1"
               placeholder="Paste URL "
               value={coverURL}
               onChange={(e) => {
