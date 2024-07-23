@@ -22,6 +22,7 @@ function LandingPage() {
         <div className="text-9xl justify-center h-full font-bold   bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6 flex items-center flex-col">
           BlogIt
         </div>
+        <p className="text-xl justify-center h-full font-bold   bg-clip-text bg-gradient-to-b from-gray-50 to-gray-400 text-transparent p-6 flex items-center flex-col">Write Freely, Connect Deeply, Inspire Many.</p>
         <Link to={"/b/blogFeed"}>
           <button className="text-6xl mx-4 my-1 relative inline-flex h-8 overflow-hidden rounded-md p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
             <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
