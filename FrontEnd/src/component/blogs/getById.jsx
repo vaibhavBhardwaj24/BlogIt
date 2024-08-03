@@ -6,11 +6,13 @@ import { toggleLike, isLiked } from "../../store/liked.js";
 import { isSaved, toggleSave } from "../../store/saved.js";
 import { Link } from "react-router-dom";
 import Loadings from "../pages/loading.jsx";
-// import "./getById.css";
+import "react-quill/dist/quill.snow.css";
+import "../ui/customQuillStyles.css"
 import axios from "axios";
 import Comments from "./comment.jsx";
 import LoggedInNavbar from "../pages/loggedInNavbar.jsx";
 import Navbar from "../pages/navbar.jsx";
+import ReactQuill from "react-quill";
 function GetById() {
   const dispatch = useDispatch();
   const [Loading, setLoading] = useState(true);
@@ -161,7 +163,14 @@ function GetById() {
                   <p>{findBlog.blogs[0].createdAt}</p>
                 </div>
                 <div className=" mt-1 text-white  md:w-4/6 w-11/12 text-2xl font-serif">
-                  {findBlog.blogs[0].article}
+                  {/* {findBlog.blogs[0].article} */}
+                  <ReactQuill
+                  theme="snow"
+                  // style={{border:"none"}}
+                    value={findBlog.blogs[0].article}
+                    readOnly={true}
+                    modules={{ toolbar: false }}
+                  ></ReactQuill>
                 </div>
                 <div className="border-[1px] border-gray-300 m-1 md:w-4/6 w-11/12 mt-4"></div>
                 <div className="flex flex-col md:w-4/6 w-11/12 ">

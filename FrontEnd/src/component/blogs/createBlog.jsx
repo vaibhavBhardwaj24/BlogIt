@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBlog } from "../../store/blogs";
 import "./createBlog.css";
 import LoggedInNavbar from "../pages/loggedInNavbar";
+import { redirect } from "react-router-dom";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 function CreateBlog() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
@@ -11,6 +14,25 @@ function CreateBlog() {
   const [coverURL, setCover] = useState(null);
   const [filePath, setFilePath] = useState("");
   const [imagePath, setImagePath] = useState("");
+  const toolbarOptions = [
+    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["blockquote", "code-block"],
+
+    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ script: "sub" }, { script: "super" }], // superscript/subscript
+    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+    [{ direction: "rtl" }], // text direction
+
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+    [{ align: [] }],
+
+    ["clean"], // remove formatting button
+  ];
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     console.log(file);
@@ -37,7 +59,7 @@ function CreateBlog() {
               setTitle(e.target.value);
             }}
           />
-          <textarea
+          {/* <textarea
             rows={20}
             type="text"
             className="text-xl w-full bg-transparent focus:outline-none  "
@@ -46,7 +68,16 @@ function CreateBlog() {
             onChange={(e) => {
               setArticle(e.target.value);
             }}
-          />
+          /> */}
+          <ReactQuill
+            modules={{ toolbar: toolbarOptions }}
+            className="text-xl w-full bg-transparent focus:outline-none h-[80vh] flex flex-col "
+            placeholder="Tell your story"
+            value={article}
+            onChange={(content, delta, source, editor) => {
+              setArticle(content);
+            }}
+          ></ReactQuill>
           <div className="flex">
             <div className="cntr flex-1 flex items-center justify-center text-[0.5em]">
               Public:
@@ -99,6 +130,7 @@ function CreateBlog() {
                     coverURL,
                   })
                 );
+                redirect("/u/profile");
               }}
             >
               Post
