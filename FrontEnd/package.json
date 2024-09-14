@@ -13,7 +13,7 @@
     "@radix-ui/react-label": "^2.1.0",
     "@reduxjs/toolkit": "^2.2.3",
     "@tabler/icons-react": "^3.7.0",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.12",
     "mini-svg-data-uri": "^1.4.4",
